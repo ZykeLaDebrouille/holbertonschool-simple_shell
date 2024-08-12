@@ -1,0 +1,21 @@
+.TH Simple Shell n "12 August 2024" "Version 1.0"
+
+.SH NAME
+Simple shell - this is our shell
+
+.SH SYNOPSIS
+.B [] [] [] []
+
+.SH DESCRIPTION
+Generally, a shell is a program that executes other programs in response to text commands
+
+.SH OPTIONS
+
+.SH EXAMPLES
+
+.SH BUGS
+
+.SH AUTHOR
+Written by :
+    - Anne-Cécile Besse (Arc) <@gmail.com>
+    - Enes Gemici <gemicieneshakki@gmail.com>
