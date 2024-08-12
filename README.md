@@ -24,6 +24,9 @@ Note : This `README.md` will be updated several times as the project progresses.
 		- [Compilation flags](#compilation-flags)
 	- [Glossary (in alphabetical order)](#glossary-in-alphabetical-order)
 	- [Unix Shell](#unix-shell)
+		- [Types of Shells](#types-of-shells)
+		- [Shell configuration](#shell-configuration)
+		- [System Calls](#system-calls)
 	- [Manpage `Simple Shell`](#manpage-simple-shell)
 		- [How we tested our project.](#how-we-tested-our-project)
 		- [Some tests to try:](#some-tests-to-try)
@@ -167,7 +170,73 @@ A Unix Shell is a command-line interpreter that provides a command-line user int
 
   - **Features:** All Unix shells provide filename wildcarding, piping, here documents, command substitution, variables, and control structures for condition-testing and iteration. 
 
+### Types of Shells
 
+1. **Thompson Shell (`sh`)**
+
+	- **Author:** Ken Thompson
+	- **First version:** November 1971
+	- **Innovations:** Introduced `input/output` redirection and pipes to connect the `output` of one commande to the `input` of another.
+	- **Design:** Minimalistic, lacking support for comments or environment variables. Commands `if` and `goto` are separate, and pipre and redirection handling were refined in later versions.
+
+
+2. **Bourne Shell (`sh`)**
+
+	- **Author:** Stephen Bourne
+	- **First version:** 1979 with Unix Version 7
+	- **Innovations:** Added features like `here documents`, `command substitution`, and more extensive control structures.
+	- **Modern Variants:**
+    	- **Almiquist Shell (`ash`):** Use in resource-constrained environments.
+    	- **Busybox:** Includes `ash` and `hush` for small and embedded systems.
+    	- **Debian Almquist Shell (`dash`):** A modern replacement for `ash` in Debian and Ubuntu.
+    	- **Bourne-Again Shell (`bash`):** Provides a superset of Bourne Shell functionalities and is the default shell for most Linux systems.
+    	- **KornShell (`ksh`), MirBSD Korn Shell (`mksh`), Z shell (`zsh`):** Each offers extensions and improvements over the Bourne Shell.
+
+
+3. **C Shell (csh)**
+
+	- **Author:** Bill Joy
+	- **First Version:** Developed at the University of California, Berkely, and widely distributed with BSD Unix.
+	- **Innovations:** Introduced features for interactive work such as command history, aliases, directory stacks, and job control. Evolved into TENEX C Shell (`tcsh`) with enhancements.
+
+### Shell configuration
+
+Shells read configuration files to customize their behavior. Here is an overview of configuration files for popular shells:
+
+| **Configuration File** | **sh**  | **ksh** | **csh** | **tcsh** | **bash** | **zsh** |
+|------------------------|---------|---------|---------|----------|----------|--------|
+| `/etc/profile`         | yes     | yes     | yes     | yes      | yes      | yes |
+| `~/.profile`           | yes     | yes     | yes     | yes      | yes      | yes |
+| `~/.bash_profile`      |         |         |         |          | yes      |     |
+| `~/.bashrc`            |         |         |         |          | yes      |     |
+| `~/.zshrc`             |         |         |         |          |          | yes |
+
+
+### System Calls
+
+**Definition:**
+
+**System calls** are functions provided by the operating system kernel that allow programs to interact directly with hardware or request low-level services. Here is an overview of key sustems calls and their usage in Unix shells.
+
+**Key System Calls**
+
+   - **`fork()`:** Creates a new process by duplicating the calling process. Used to launch commands in a shell.
+   - **`exec()`:** Replaces the current process image with a new process image. Used to execute commands in a shell.
+   - **`wait()`:** Waits for child processes to terminate. Used to synchronize process execution.
+   - **`pipe()`:** Creates a communication channel between processes, allowing redirection of one process's output to another's input.
+   - **`chdir()`:** Changes the current working directory of the process.
+   - **`open()`, `read()`, `write()`, `close()`:** Basic file operations.
+  
+**Why Avoid Direct System Calls?**
+
+- **Complexity:** Direct use of system calls can make code more complexe and harder to maintain.
+- **Portability:** System calls can vary between operating systems. Scripts using these calls directly may not be portable across different Unix versions or distributions.
+- **Security:** Errors in using system calls can introduce security vulnerabilities.
+- **Abstraction:** Unix shells provide abstractions that simplify system interaction, such as rediction, pipes, and environment variables, Using these abstractions is often safer and easier than direct system call usage.
+
+**Conclusion**
+
+Unix shells play a crucial role in interacting with Unix-like operating systems, offering robust features for users and system administrators. While underlying system calls are fundamental to shell operation, it is generally preferable to use the abstractions provided by the shells for routine tasks to simplify development, enhance portability, and ensure security.
 
 ## Manpage `Simple Shell`
 
@@ -261,6 +330,7 @@ Here are some simple test to try:
 
 
 ## Conclusion
+
 
 
 ## Author
