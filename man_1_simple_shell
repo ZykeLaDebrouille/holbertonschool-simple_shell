@@ -1,21 +1,33 @@
-.TH Simple Shell n "12 August 2024" "Version 1.0"
+.TH Simple_Shell 1 "12 August 2024" "Version 1.0"
 
 .SH NAME
-Simple shell - this is our shell
+simple_shell \- this is our shell
 
 .SH SYNOPSIS
 .B [] [] [] []
 
 .SH DESCRIPTION
 Generally, a shell is a program that executes other programs in response to text commands
+Simple Shell is a simple UNIX command interpreter that mimics the behavior of the standard UNIX shell.
+It reads commands from the user, parses them, and executes them as if they were entered in a standard shell.
+
+A Unix Shell is a command-line interpreter that provides a command-line user interface for Unix-like operating systems. It serves as both an interactive command language and a scripting language, allowing users to control system operations through shell scripts.
+
+Features: All Unix shells provide filename wildcarding, piping, here documents, command substitution, variables, and control structures for condition-testing and iteration.
 
 .SH OPTIONS
 
 .SH EXAMPLES
 
 .SH BUGS
+No known bugs at this time. If you encounter any issues, please report them to the project maintainers.
 
 .SH AUTHOR
-Written by :
-    - Anne-Cécile Besse (Arc) <annececilebesse@gmail.com>
-    - Enes Gemici <gemicieneshakki@gmail.com>
+.TP
+.IB Written by :
+.TP
+- Anne-Cécile Besse (Arc) <annececilebesse@gmail.com>
+- Enes Gemici <gemicieneshakki@gmail.com>
+
+.SH SEE ALSO
+.BR bash (1),
