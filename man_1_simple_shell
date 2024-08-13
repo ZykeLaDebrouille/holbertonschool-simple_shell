@@ -39,7 +39,26 @@ The following commands are executed in the shell as builtins
 .SH EXAMPLES
 
 .SH BUGS
-No known bugs at this time. If you encounter any issues, please report them to the project maintainers.
+*Example of error with `sh`:*
+
+```bash
+$ echo "qwerty" | /bin/sh
+/bin/sh: 1: qwerty: not found
+$ echo "qwerty" | /bin/../bin/sh
+/bin/../bin/sh: 1: qwerty: not found
+$
+```
+
+*Same error with our program `hsh`:*
+
+```bash
+$ echo "qwerty" | ./hsh
+./hsh: 1: qwerty: not found
+$ echo "qwerty" | ./././hsh
+./././hsh: 1: qwerty: not found
+$
+```
+If you encounter any issues, please report them to the project maintainers.
 
 .SH AUTHOR
 .TP
