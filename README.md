@@ -19,20 +19,47 @@ Note : This `README.md` will be updated several times as the project progresses.
 
 - [Project `Simple Shell`](#project-simple-shell)
 	- [Summary](#summary)
+	- [Introduction](#introduction)
+		- [Mandatory tasks](#mandatory-tasks)
+		- [Placeholder for potential advanced tasks](#placeholder-for-potential-advanced-tasks)
 	- [Requierements](#requierements)
 		- [Operating System:](#operating-system)
 		- [Compilation flags](#compilation-flags)
+		- [General requirements and restrictions for the projects](#general-requirements-and-restrictions-for-the-projects)
+		- [Allowed Functions and system calls+](#allowed-functions-and-system-calls)
 	- [Glossary (in alphabetical order)](#glossary-in-alphabetical-order)
-	- [Unix Shell](#unix-shell)
+	- [What is a Unix Shell?](#what-is-a-unix-shell)
 		- [Types of Shells](#types-of-shells)
 		- [Shell configuration](#shell-configuration)
 		- [System Calls](#system-calls)
+		- [Interactive and Non-Interactive Modes](#interactive-and-non-interactive-modes)
 	- [Manpage `Simple Shell`](#manpage-simple-shell)
 		- [How we tested our project.](#how-we-tested-our-project)
 		- [Some tests to try:](#some-tests-to-try)
 	- [Flowchart](#flowchart)
 	- [Conclusion](#conclusion)
 	- [Author](#author)
+
+## Introduction
+
+In this project, we will develop a fundamental Unix command-line interpreter, resembling a traditional  Unix shell, but simpler (which give the name "Simple Shell").
+
+### Mandatory tasks
+
+Our objectives for the mandatory taks are:
+
+1. **Code Quality:** Adhere to Betty Coding style guidelines to ensure cleanr, readable code.
+
+2. **Basi Shell Implementaion:**  Create a simple shell that:
+	- Displays a prompt and processes single-word commands.
+	- Handles errors, including unrecognized commands and **end-of-file** confitions (Ctrl+D).
+	- Repeats the prompt after each command execution (going back to the line to allow the user to type again.)
+
+3. **More Functionalities:** Extene the shell to handle commands with arguments and manage executable paths correctly 
+
+4. **Built-in Commands:** Implement basi built-in commands, including `exit` to terminate the shell and `env` to display environment variables.
+
+### Placeholder for potential advanced tasks
 
 ## Requierements
 
@@ -79,20 +106,94 @@ sudo apt-get install git
 This project must be compiled with the following flags:
 
 ```sh
-gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format
+gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 ```
 
 - **`-Wall`:** Enables all standard compiler warnings.
 
-- **`-Wextra`:** Enables additional warnings not covered by **`-Wall`**.
-
 - **`-Werror`:** Treats all warnings as errors, stopping compilation.
+
+- **`-Wextra`:** Enables additional warnings not covered by **`-Wall`**.
 
 - **`-pedantic`:** Enforces strict ISO C compliance.
 
 - **`-std=gnu89`:** Uses the GNU89 standard for C, allowing GNU extensions to the ANSI C standard
 
 - **`Wno-format`:** Disables format warnings.
+
+### General requirements and restrictions for the projects
+
+- Allowed editors: `vi`, `vim`, `emacs`
+- All files shouls end with a new line
+- A `README.md` file, at the root of the folder of the project is mandatory (hello you are in there!)
+- Code should use the `Betty` style. It will be checked using [Betty-style.pl](https://github.com/hs-hq/Betty/blob/main/betty-style.pl) and [betty-doc.pl](https://github.com/hs-hq/Betty/blob/main/betty-doc.pl)
+- The simple Shell should **not** have any memory leaks.
+- No more than 5 functions per file.
+- All headers files shouls be include guarded
+- System calls **only** when needed.
+- Unless specified otherwise, the program **must have the exact same output** as `sh` (`/bin/sh`) as well as the exact same error output.
+- Only difference is when printing an error. The name of the program must be equivalent to the `argv[0]` (See below)
+
+*Example of error with `sh`:*
+
+```bash
+$ echo "qwerty" | /bin/sh
+/bin/sh: 1: qwerty: not found
+$ echo "qwerty" | /bin/../bin/sh
+/bin/../bin/sh: 1: qwerty: not found
+$
+```
+
+*Same error with our program `hsh`:*
+
+```bash
+$ echo "qwerty" | ./hsh
+./hsh: 1: qwerty: not found
+$ echo "qwerty" | ./././hsh
+./././hsh: 1: qwerty: not found
+$
+```
+
+### Allowed Functions and system calls+
+
+all functions from `string.h` and the functions and system calls below:
+
+  - `access` (man 2 access)
+  - `chdir` (man 2 chdir)
+  - `close` (man 2 close)
+  - `closedir` (man 3 closedir)
+  - `execve` (man 2 execve)
+  - `exit` (man 3 exit)
+  - `_exit` (man 2 _exit)
+  - `fflush` (man 3 fflush)
+  - `fork` (man 2 fork)
+  - `free` (man 3 free)
+  - `getcwd` (man 3 getcwd)
+  - `getline` (man 3 getline)
+  - `getpid` (man 2 getpid)
+  - `isatty` (man 3 isatty)
+  - `kill` (man 2 kill)
+  - `malloc` (man 3 malloc)
+  - `open` (man 2 open)
+  - `opendir` (man 3 opendir)
+  - `perror` (man 3 perror)
+  - `printf` (man 3 printf)
+  - `fprintf` (man 3 fprintf)
+  - `vfprintf` (man 3 vfprintf)
+  - `sprintf` (man 3 sprintf)
+  - `putchar` (man 3 putchar)
+  - `read` (man 2 read)
+  - `readdir` (man 3 readdir)
+  - `signal` (man 2 signal)
+  - `stat` (__xstat) (man 2 stat)
+  - `lstat` (__lxstat) (man 2 lstat)
+  - `fstat` (__fxstat) (man 2 fstat)
+  - `strtok` (man 3 strtok)
+  - `wait` (man 2 wait)
+  - `waitpid` (man 2 waitpid)
+  - `wait3` (man 2 wait3)
+  - `wait4` (man 2 wait4)
+  - `write` (man 2 write)
 
 ## Glossary (in alphabetical order)
 
@@ -104,19 +205,19 @@ gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format
 
 **C**
 
-  - **`Chdir`:** A system call that changes the current working directory of a process.
+  - **`chdir()`:** A system call that changes the current working directory of a process.
 
-  - **C Shell (csh):** A Unix shell modeled after the C programming language, developed by Bill Joy. It introduced features like command history, aliases, and job control.
+  - **C Shell (`csh`):** A Unix shell modeled after the C programming language, developed by Bill Joy. It introduced features like command history, aliases, and job control.
 
   - **Configuration File:** A file used to set up and customize the behavior of a shell. It typically includes commands to initialize environment variables and shell settings.
 
 **D**
 
-  - **Debian Almquist Shell (dash):** A modern replacement for ash used in Debian and Ubuntu, known for its efficiency and POSIX compliance.
+  - **Debian Almquist Shell (`dash`):** A modern replacement for `ash` used in Debian and Ubuntu, known for its efficiency and POSIX compliance.
 
 **F**
 
-  - **`Fork`:** A system call that creates a new process by duplicating the calling process. It is used to launch new commands in a shell.
+  - **`fork()`:** A system call that creates a new process by duplicating the calling process. It is used to launch new commands in a shell.
 
 **G**
 
@@ -125,22 +226,24 @@ gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format
 **I**
 
   - **Input/Output Redirection:** A shell feature that allows users to direct the input or output of a command to/from files or other commands.
+  - **Interactive Mode:** A mode in wich the shell waits for user input, processes commands as they are entered, and provides immediate feedback. Features command history, autocompletion, and a prompt.
+  - **Non-Interactive Mode:** A mode in which the shell executes commands from a script or a file without user interaction. Useful for automation and batch processing
 
 **K**
 
-  - **KornShell (ksh):** A Unix shell written by David Korn, based on the Bourne Shell. It includes advanced features like associative arrays and string manipulation.
+  - **KornShell (`ksh`):** A Unix shell written by David Korn, based on the Bourne Shell. It includes advanced features like associative arrays and string manipulation.
 
-  - **MirBSD Korn Shell (mksh):** A descendant of the OpenBSD Korn Shell and public domain Korn Shell, developed as part of MirOS BSD.
+  - **MirBSD Korn Shell (`mksh`):** A descendant of the OpenBSD Korn Shell and public domain Korn Shell, developed as part of MirOS BSD.
 
 **M**
 
-  - **Modern Shells:** Refers to contemporary Unix shells such as Bourne-Again Shell (bash), Z Shell (zsh), and others that have evolved from earlier shells.
+  - **Modern Shells:** Refers to contemporary Unix shells such as Bourne-Again Shell (`bash`), Z Shell (`zsh`), and others that have evolved from earlier shells.
 
 **P**
 
-  - **`Pipe`:** A system call that creates a communication channel between processes, enabling the output of one process to be used as input for another.
+  - **`pipe()`:** A system call that creates a communication channel between processes, enabling the output of one process to be used as input for another.
 
-  - **`Pipe` (in shell):** A mechanism to pass the output of one command as the input to another command using the `|` symbol.
+  - **`pipe` (in shell):** A mechanism to pass the output of one command as the input to another command using the `|` symbol.
 
 **S**
 
@@ -150,15 +253,15 @@ gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format
 
 **T**
 
-  - **Thompson Shell (sh):** The first Unix shell, introduced in 1971 by Ken Thompson. It was minimalistic, supporting basic input/output redirection and pipes.
+  - **Thompson Shell (`sh`):** The first Unix shell, introduced in 1971 by Ken Thompson. It was minimalistic, supporting basic input/output redirection and pipes.
 
 **Z**
 
-  - **Z Shell (zsh):** A modern shell with extensive features, backward compatible with bash, and the default shell in some distributions like Kali Linux and macOS.
+  - **Z Shell (`zsh`):** A modern shell with extensive features, backward compatible with bash, and the default shell in some distributions like Kali Linux and macOS.
 
  
 
-## Unix Shell
+## What is a Unix Shell?
 
 **Definition:**
 
@@ -176,7 +279,7 @@ A Unix Shell is a command-line interpreter that provides a command-line user int
 
 	- **Author:** Ken Thompson
 	- **First version:** November 1971
-	- **Innovations:** Introduced `input/output` redirection and pipes to connect the `output` of one commande to the `input` of another.
+	- **Innovations:** Introduced `input/output` redirection and pipes to connect the `output` of one command to the `input` of another.
 	- **Design:** Minimalistic, lacking support for comments or environment variables. Commands `if` and `goto` are separate, and pipre and redirection handling were refined in later versions.
 
 
@@ -204,12 +307,12 @@ A Unix Shell is a command-line interpreter that provides a command-line user int
 Shells read configuration files to customize their behavior. Here is an overview of configuration files for popular shells:
 
 | **Configuration File** | **sh**  | **ksh** | **csh** | **tcsh** | **bash** | **zsh** |
-|------------------------|---------|---------|---------|----------|----------|--------|
-| `/etc/profile`         | yes     | yes     | yes     | yes      | yes      | yes |
-| `~/.profile`           | yes     | yes     | yes     | yes      | yes      | yes |
-| `~/.bash_profile`      |         |         |         |          | yes      |     |
-| `~/.bashrc`            |         |         |         |          | yes      |     |
-| `~/.zshrc`             |         |         |         |          |          | yes |
+|------------------------|---------|---------|---------|----------|----------|---------|
+| `/etc/profile`         | yes     | yes     | yes     | yes      | yes      | yes 	   |
+| `~/.profile`           | yes     | yes     | yes     | yes      | yes      | yes 	   |
+| `~/.bash_profile`      |         |         |         |          | yes      |     	   |
+| `~/.bashrc`            |         |         |         |          | yes      |     	   |
+| `~/.zshrc`             |         |         |         |          |          | yes 	   |
 
 
 ### System Calls
@@ -233,6 +336,39 @@ Shells read configuration files to customize their behavior. Here is an overview
 - **Portability:** System calls can vary between operating systems. Scripts using these calls directly may not be portable across different Unix versions or distributions.
 - **Security:** Errors in using system calls can introduce security vulnerabilities.
 - **Abstraction:** Unix shells provide abstractions that simplify system interaction, such as rediction, pipes, and environment variables, Using these abstractions is often safer and easier than direct system call usage.
+
+### Interactive and Non-Interactive Modes
+
+**Interactive Mode:**
+
+  - **Definition:**
+	
+	In **interactive mode**, the shell waits for user input, processes commands as they are entered, and provides immediate feedback.
+
+  - **Features:**
+
+    - **Command History:** Users can navigate through previously executed commands.
+    - **Autocompletion:** The shell can auto-complete file names and commands.
+    - **Prompt:** The shell displays a prompt indicating that it is ready to accept commands.
+  
+  - **Use Case:** 
+  
+  This mode is commonly used in terminal sessions where users manually enter commands to interact with the system.  
+
+**Non-Interactive Mode:**
+
+  - **Definition:**
+
+  In **non-interactive mode**, the shell executes commands from a script or a file without user interaction. It reads commands from a script or input file and processes them in sequence.
+
+  - **Features:**
+    
+	- **Script Execution:** Useful for automating tasks such as system maintenance, software installation, and backups.
+	- **No Prompt:** There is a no prompt for user input; commands are executed in the background.
+
+  - **Use Case:**
+
+  This mode is ideal for running automated scripts or batch processing tasks where user interaction is not required.  
 
 **Conclusion**
 
