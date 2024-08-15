@@ -17,6 +17,15 @@ Features: All Unix shells provide filename wildcarding, piping, here documents, 
 
 .SH OPTIONS
 
+.SH Key System Calls
+
+   - **`fork()`:** Creates a new process by duplicating the calling process. Used to launch commands in a shell.
+   - **`exec()`:** Replaces the current process image with a new process image. Used to execute commands in a shell.
+   - **`wait()`:** Waits for child processes to terminate. Used to synchronize process execution.
+   - **`pipe()`:** Creates a communication channel between processes, allowing redirection of one process's output to another's input.
+   - **`chdir()`:** Changes the current working directory of the process.
+   - **`open()`, `read()`, `write()`, `close()`:** Basic file operations.
+
 .SH BUILTIN COMMANDS
 The following commands below are called and handled directly in the shell.
 Therefore, these commands do not need to call upon a child process to be
