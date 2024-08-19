@@ -7,7 +7,25 @@
 #include <errno.h>
 
 #define BUFFER_SIZE 1024
+/**
+ * remove_newline - replace the '\n' by a null byte
+ * @str: string to be tested
+ */
+void remove_newline(char *str)
+{
+	size_t i = 0;
 
+	/* character or end of string is found */
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\n')
+		{
+			str[i] = '\0'; /* Replace newline with null terminator */
+			break;
+		}
+		i++;
+	}
+}
 /**
  * main - Un shell simple qui exécute des commandes avec leur chemin complet
  *
@@ -22,17 +40,15 @@ int main(void)
 	int child_status;
 
 	while (1)
-	{	printf("prompt$ ");
+	{	printf("$ ");
 		command_size = getline(&input_user, &input_length, stdin);
 		if (command_size == -1)
 		{
-			perror("Erreur de lecture de la ligne");
-			continue;
+			printf("\n");
+			break;
 		}
 		remove_newline(input_user);
 
-		if (strcmp(input_user, "exit") == 0)
-			break;
 		child_pid = fork();
 		if (child_pid == -1)
 		{
@@ -55,22 +71,4 @@ int main(void)
 	free(input_user);
 	return (0);
 }
-/**
- * remove_newline - replace the '\n' by a null byte
- * @str: string to be tested
- */
-void remove_newline(char *str)
-{
-	size_t i = 0;
 
-	/* character or end of string is found */
-	while (str[i] != '\0')
-	{
-		if (str[i] == '\n')
-		{
-			str[i] = '\0'; /* Replace newline with null terminator */
-			break;
-		}
-		i++;
-	}
-}
