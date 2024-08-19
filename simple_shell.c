@@ -22,20 +22,21 @@ int main(void)
 	int child_status;
 
 	while (1)
-	{	printf("$ ");
+	{	printf("prompt$ ");
 		command_size = getline(&input_user, &input_length, stdin);
 		if (command_size == -1)
 		{
 			perror("Erreur de lecture de la ligne");
 			continue;
 		}
-		if (input_user[command_size - 1] == '\n')
-			input_user[command_size - 1] = '\0';
+		remove_newline(input_user);
+
 		if (strcmp(input_user, "exit") == 0)
 			break;
 		child_pid = fork();
 		if (child_pid == -1)
-		{	perror("Erreur de fork");
+		{
+			perror("Erreur de fork");
 			continue;
 		}
 		if (child_pid == 0)
@@ -49,10 +50,27 @@ int main(void)
 			}
 		}
 		else
-		{
 			wait(&child_status); /* Attendre que l'enfant se termine */
-		}
 	}
 	free(input_user);
 	return (0);
+}
+/**
+ * remove_newline - replace the '\n' by a null byte
+ * @str: string to be tested
+ */
+void remove_newline(char *str)
+{
+	size_t i = 0;
+
+	/* character or end of string is found */
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\n')
+		{
+			str[i] = '\0'; /* Replace newline with null terminator */
+			break;
+		}
+		i++;
+	}
 }
