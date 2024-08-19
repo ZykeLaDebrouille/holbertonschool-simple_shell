@@ -43,7 +43,9 @@ int main(int argc, char **argv, char **env)
 	int child_status;
 	(void)argc, (void)env; /*unused*/
 	while (1)
-	{	printf("$ ");
+	{
+		if (isatty(STDIN_FILENO))
+			printf("$ ");
 		inputUSER = getline(&command, &input_length, stdin);
 		if (inputUSER == -1) /*CTRL+D*/
 		{
