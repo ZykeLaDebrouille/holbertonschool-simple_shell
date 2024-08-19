@@ -42,7 +42,7 @@ int main(void)
 	while (1)
 	{	printf("$ ");
 		command_size = getline(&input_user, &input_length, stdin);
-		if (command_size == -1)
+		if (command_size == -1) /*CTRL+D*/
 		{
 			printf("\n");
 			break;
@@ -53,7 +53,7 @@ int main(void)
 		if (child_pid == -1)
 		{
 			perror("Erreur de fork");
-			break;
+			continue;
 		}
 		if (child_pid == 0)
 		{
