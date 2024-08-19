@@ -53,7 +53,7 @@ int main(void)
 		if (child_pid == -1)
 		{
 			perror("Erreur de fork");
-			continue;
+			break;
 		}
 		if (child_pid == 0)
 		{
