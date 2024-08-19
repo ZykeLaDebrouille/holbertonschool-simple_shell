@@ -28,26 +28,29 @@ void remove_newline(char *str)
 }
 /**
  * main - Un shell simple qui exécute des commandes avec leur chemin complet
+ * @argc: Argument count
+ * @argv: Argument array
+ * @env: Environment variables
  *
  * Return: Toujours 0.
  */
-int main(void)
+int main(int argc, char **argv, char **env)
 {
-	char *input_user = NULL, *args[2];
+	char *command = NULL, *args[2];
 	size_t input_length = 0;
-	ssize_t command_size;
+	ssize_t inputUSER;
 	pid_t child_pid;
 	int child_status;
-
+	(void)argc, (void)env; /*unused*/
 	while (1)
 	{	printf("$ ");
-		command_size = getline(&input_user, &input_length, stdin);
-		if (command_size == -1) /*CTRL+D*/
+		inputUSER = getline(&command, &input_length, stdin);
+		if (inputUSER == -1) /*CTRL+D*/
 		{
 			printf("\n");
 			break;
 		}
-		remove_newline(input_user);
+		remove_newline(command);
 
 		child_pid = fork();
 		if (child_pid == -1)
@@ -57,18 +60,18 @@ int main(void)
 		}
 		if (child_pid == 0)
 		{
-			args[0] = input_user; /* Commande à exécuter */
+			args[0] = command; /* Commande à exécuter */
 			args[1] = NULL; /* Terminaison du tableau d'arguments */
 			if (execve(args[0], args, NULL) == -1)
 			{
-				perror("Erreur d'exécution de la commande");
+				fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
 				exit(EXIT_FAILURE);
 			}
 		}
 		else
 			wait(&child_status); /* Attendre que l'enfant se termine */
 	}
-	free(input_user);
+	free(command);
 	return (0);
 }
 
