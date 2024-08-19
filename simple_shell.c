@@ -30,18 +30,18 @@ void remove_newline(char *str)
  * main - Un shell simple qui exécute des commandes avec leur chemin complet
  * @argc: Argument count
  * @argv: Argument array
- * @env: Environment variables
+ * @envp: Environment variables
  *
  * Return: Toujours 0.
  */
-int main(int argc, char **argv, char **env)
+int main(int argc, char **argv, char **envp)
 {
 	char *command = NULL, *args[2];
 	size_t input_length = 0;
 	ssize_t inputUSER;
 	pid_t child_pid;
 	int child_status;
-	(void)argc, (void)env; /*unused*/
+	(void)argc; /*unused*/
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
@@ -64,7 +64,7 @@ int main(int argc, char **argv, char **env)
 		{
 			args[0] = command; /* Commande à exécuter */
 			args[1] = NULL; /* Terminaison du tableau d'arguments */
-			if (execve(args[0], args, NULL) == -1)
+			if (execve(args[0], args, envp) == -1)
 			{
 				fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
 				exit(EXIT_FAILURE);
