@@ -13,10 +13,13 @@
 #define BUFSIZE 1024
 
 /*simple_shell.c*/
-void remove_newline(char *str);/*si nouvelle ligne remplace par "\0"*/
-void execute_command(char *command, char **argv, char **env);/*fork pour le child process*/
+void remove_newline(char *str);
+void execute_command(char *command, char **argv, char **env);
 
 /*print_env.c*/
-void print_env(char **env); /*avoir l'environnement*/
+void print_env(char **env);
+
+/*4-split_string_in_token.c*/
+int split_string_in_token(char *str);
 
 #endif

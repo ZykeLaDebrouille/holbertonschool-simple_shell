@@ -74,7 +74,7 @@ int main(int argc, char **argv, char **env)
 		if (inputUSER == -1) /* si CTRL+D*/
 			break;
 		remove_newline(command);
-
+		split_string_in_token(command);
 		if (access(command, X_OK) == -1) /*Vérifier si la commande est exécutable*/
 		{
 			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
