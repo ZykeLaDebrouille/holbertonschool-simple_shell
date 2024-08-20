@@ -40,7 +40,7 @@ void execute_command(char *command, char **argv, char **env)
 	if (child_pid == 0)
 	{
 		args[0] = command; /*Commande à exécuter*/
-		args[1] = NULL; /*Terminaison du tableau d'arguments*/
+		args[1] = NULL;	   /*Terminaison du tableau d'arguments*/
 		if (execve(args[0], args, env) == -1)
 		{
 			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
@@ -63,14 +63,14 @@ void execute_command(char *command, char **argv, char **env)
 int main(int argc, char **argv, char **env)
 {
 	char *command = NULL;
-	size_t input_length = 0;
+	size_t command_size = 0;
 	ssize_t inputUSER;
 	(void)argc; /*unused*/
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
 			printf("$ ");
-		inputUSER = getline(&command, &input_length, stdin);
+		inputUSER = getline(&command, &command_size, stdin);
 		if (inputUSER == -1) /* si CTRL+D*/
 			break;
 		remove_newline(command);
@@ -86,4 +86,3 @@ int main(int argc, char **argv, char **env)
 	free(command);
 	return (0);
 }
-
