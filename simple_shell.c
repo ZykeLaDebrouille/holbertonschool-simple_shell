@@ -1,12 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <errno.h>
-
-#define BUFFER_SIZE 1024
+#include "shell.h"
 /**
  * remove_newline - replace the '\n' by a null byte
  * @str: string to be tested
