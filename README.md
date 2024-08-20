@@ -32,10 +32,9 @@ Note : This `README.md` will be updated several times as the project progresses.
 		- [Interactive and Non-Interactive Modes](#interactive-and-non-interactive-modes)
 	- [Introduction to the project `Simple Shell`](#introduction-to-the-project-simple-shell)
 		- [Mandatory tasks](#mandatory-tasks)
-		- [Placeholder for potential advanced tasks](#placeholder-for-potential-advanced-tasks)
 	- [Building the `Simple Shell`](#building-the-simple-shell)
 		- [Important notions encountered](#important-notions-encountered)
-			- [Understanding Process IDs (`PIDs`) and a Parent Process IDs (`PPIDs`)\*\*](#understanding-process-ids-pids-and-a-parent-process-ids-ppids)
+			- [Understanding Process IDs (`PIDs`) and a Parent Process IDs (`PPIDs`)](#understanding-process-ids-pids-and-a-parent-process-ids-ppids)
 	- [Manpage `Simple Shell`](#manpage-simple-shell)
 		- [How we tested our project.](#how-we-tested-our-project)
 		- [Some tests to try:](#some-tests-to-try)
@@ -373,15 +372,13 @@ Our objectives for the mandatory taks are:
 
 3. **More Functionalities:** Extene the shell to handle commands with arguments and manage executable paths correctly 
 
-4. **Built-in Commands:** Implement basi built-in commands, including `exit` to terminate the shell and `env` to display environment variables.
-
-### Placeholder for potential advanced tasks
+4. **Built-in Commands:** Implement basic built-in commands, including `exit` to terminate the shell and `env` to display environment variables.
 
 ## Building the `Simple Shell`
 
 ### Important notions encountered
 
-#### Understanding Process IDs (`PIDs`) and a Parent Process IDs (`PPIDs`)**
+#### Understanding Process IDs (`PIDs`) and a Parent Process IDs (`PPIDs`)
 
 **Key Concepts:**
 
@@ -436,9 +433,9 @@ Little breakdown about what this all about:
 
   - **`-m 0644`:** Sets the permissions of the file (readable and writable by the owner, readable by others).
 
-  - **`man_3_placeholder`:** The source file for the manpage.
+  - **`man_1_simple_shell`:** The source file for the manpage.
 
-  - **placeholder:** The destination path for the installed manpage.
+  - **`usr/local/man/man1/`:** The destination path for the installed manpage.
 
 
 **Step 3: Update the manpage database**
@@ -452,7 +449,7 @@ sudo mandb
 **Step 4: Try it**
 
 ```sh
-man placeholder
+man simple_shell
 ```
 
 ### How we tested our project.
@@ -464,7 +461,7 @@ So, to provide a safe environnement to test our functions without messing everyt
 We adjusted or implemented the changes what we wanted to try, then compiled everything together like this:
 
 ```sh
-gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format placeholder
+gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format *.c
 ```
 
 to test if it works.
@@ -474,7 +471,7 @@ to test if it works.
 To ensure there are no memory leaks or other issues, we used Valgrind for testing at each step. Here’s a brief example command to check for memory-related problems:
 
 ```sh
-valgrind --leak-check=full ./placeholder
+valgrind --leak-check=full ./programname
 ```
 
 *Valgrind Output*
@@ -494,10 +491,11 @@ This allowed us to verify if our function operated correctly and efficiently, en
 
 ### Some tests to try:
 
-Here are some simple test to try:
+Here are some simple test to try: **placeholder**
 
 ## Flowchart
 
+![Flowchart](https://cdn.discordapp.com/attachments/385020139839422464/1275399296618991626/flowchart_simp.png?ex=66c5bfa8&is=66c46e28&hm=e455fa9dae19747ee14114adecfc56c8ddf76fb49dc3c3db4c5abffc22bb7363&)
 
 ## Conclusion
 
