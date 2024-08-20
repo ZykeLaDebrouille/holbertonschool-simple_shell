@@ -8,15 +8,21 @@
 */
 int built_in(char *command, char **environ)
 {
-	if (strcmp(command, "exit") == 0)
+	if (command == NULL) /*si pas de commande*/
+	{
+		return (1);
+	}
+
+	if (strcmp(command, "exit") == 0) /* si commande = "exit" */
 	{
 		free(command);
 		exit(EXIT_SUCCESS);
+		return (0);
 	}
 
-	if (strcmp(command, "env") == 0)
+	if (strcmp(command, "env") == 0) /* si commande = "env "*/
 	{
 		print_env(environ);
+		return (0);
 	}
-
 }
