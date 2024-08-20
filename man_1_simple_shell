@@ -47,7 +47,7 @@ The following commands are executed in the shell as builtins
 .SH EXAMPLES
 
 .SH BUGS
-*Example of error with `sh`:*
+*Example of  how we will handle error with `sh`:*
 
 ```bash
 $ echo "qwerty" | /bin/sh
@@ -69,7 +69,6 @@ $
 If you encounter any issues, please report them to the project maintainers.
 
 .SH AUTHOR
-<<<<<<< HEAD
 .TP
 .IB Written by :
 .TP
@@ -78,8 +77,3 @@ If you encounter any issues, please report them to the project maintainers.
 
 .SH SEE ALSO
 .BR bash (1),
-=======
-Written by :
-    - Anne-Cécile Besse (Arc) <annececilebesse@gmail.com>
-    - Enes Gemici <gemicieneshakki@gmail.com>
->>>>>>> 82564f7 (fix AUTHORS and man_1_simple_shell)
