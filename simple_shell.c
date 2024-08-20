@@ -27,6 +27,40 @@ void remove_newline(char *str)
 	}
 }
 /**
+ * execute_command - Crée un processus enfant pour exécuter une commande
+ * @command: Commande à exécuter
+ * @argv: Nom du programme pour les messages d'erreur
+ * @env: Variables d'environnement
+ */
+void execute_command(char *command, char **argv, char **env)
+{
+	pid_t child_pid;
+	int child_status;
+	char *args[2];
+
+	child_pid = fork(); /*Créer un processus enfant*/
+	if (child_pid == -1)
+	{
+		perror("Erreur de fork");
+		return;
+	}
+
+	if (child_pid == 0)
+	{
+		args[0] = command; /*Commande à exécuter*/
+		args[1] = NULL; /*Terminaison du tableau d'arguments*/
+		if (execve(args[0], args, env) == -1)
+		{
+			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
+			exit(EXIT_FAILURE);
+		}
+	}
+	else
+	{
+		wait(&child_status); /*Attendre que l'enfant se termine*/
+	}
+}
+/**
  * main - Un shell simple qui exécute des commandes avec leur chemin complet
  * @argc: Argument count
  * @argv: Argument array
@@ -36,42 +70,29 @@ void remove_newline(char *str)
  */
 int main(int argc, char **argv, char **envp)
 {
-	char *command = NULL, *args[2];
+	char *command = NULL;
 	size_t input_length = 0;
 	ssize_t inputUSER;
-	pid_t child_pid;
-	int child_status;
 	(void)argc; /*unused*/
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
 			printf("$ ");
 		inputUSER = getline(&command, &input_length, stdin);
-		if (inputUSER == -1) /*CTRL+D*/
+		if (inputUSER == -1) /* si CTRL+D*/
 		{
 			printf("\n");
 			break;
 		}
 		remove_newline(command);
 
-		child_pid = fork();
-		if (child_pid == -1)
+		if (access(command, X_OK) == -1) /*Vérifier si la commande est exécutable*/
 		{
-			perror("Erreur de fork");
+			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
 			continue;
 		}
-		if (child_pid == 0)
-		{
-			args[0] = command; /* Commande à exécuter */
-			args[1] = NULL; /* Terminaison du tableau d'arguments */
-			if (execve(args[0], args, envp) == -1)
-			{
-				fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
-				exit(EXIT_FAILURE);
-			}
-		}
-		else
-			wait(&child_status); /* Attendre que l'enfant se termine */
+
+		execute_command(command, argv, envp); /*Appele fonction pour exéc commande*/
 	}
 	free(command);
 	return (0);
