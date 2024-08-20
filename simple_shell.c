@@ -72,10 +72,7 @@ int main(int argc, char **argv, char **envp)
 			printf("$ ");
 		inputUSER = getline(&command, &input_length, stdin);
 		if (inputUSER == -1) /* si CTRL+D*/
-		{
-			printf("\n");
 			break;
-		}
 		remove_newline(command);
 
 		if (access(command, X_OK) == -1) /*Vérifier si la commande est exécutable*/
