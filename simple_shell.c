@@ -24,7 +24,7 @@ void remove_newline(char *str)
  * @argv: Nom du programme pour les messages d'erreur
  * @env: Variables d'environnement
  */
-void execute_command(char *command, char **argv, char **env)
+void execute_command(char *command, char **argv, char **envp)
 {
 	pid_t child_pid;
 	int child_status;
@@ -41,7 +41,7 @@ void execute_command(char *command, char **argv, char **env)
 	{
 		args[0] = command; /*Commande à exécuter*/
 		args[1] = NULL; /*Terminaison du tableau d'arguments*/
-		if (execve(args[0], args, env) == -1)
+		if (execve(args[0], args, envp) == -1)
 		{
 			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
 			exit(EXIT_FAILURE);
@@ -56,7 +56,7 @@ void execute_command(char *command, char **argv, char **env)
  * main - Un shell simple qui exécute des commandes avec leur chemin complet
  * @argc: Argument count
  * @argv: Argument array
- * @envp: Environment variables
+ * @envp: Environment variables pour le main
  *
  * Return: Toujours 0.
  */
