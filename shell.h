@@ -12,6 +12,11 @@
 #include <errno.h>
 #define BUFSIZE 1024
 
+/*simple_shell.c*/
+void remove_newline(char *str);
+void execute_command(char *command, char **argv, char **env);
+int main(int argc, char **argv, char **envp);
 
+/**/
 
 #endif
