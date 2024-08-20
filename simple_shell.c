@@ -22,9 +22,9 @@ void remove_newline(char *str)
  * execute_command - Crée un processus enfant pour exécuter une commande
  * @command: Commande à exécuter
  * @argv: Nom du programme pour les messages d'erreur
- * @envp: Variables d'environnement
+ * @env: Variables d'environnement
  */
-void execute_command(char *command, char **argv, char **envp)
+void execute_command(char *command, char **argv, char **env)
 {
 	pid_t child_pid;
 	int child_status;
@@ -41,7 +41,7 @@ void execute_command(char *command, char **argv, char **envp)
 	{
 		args[0] = command; /*Commande à exécuter*/
 		args[1] = NULL; /*Terminaison du tableau d'arguments*/
-		if (execve(args[0], args, envp) == -1)
+		if (execve(args[0], args, env) == -1)
 		{
 			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
 			exit(EXIT_FAILURE);
@@ -56,11 +56,11 @@ void execute_command(char *command, char **argv, char **envp)
  * main - Un shell simple qui exécute des commandes avec leur chemin complet
  * @argc: Argument count
  * @argv: Argument array
- * @envp: Environment variables pour le main
+ * @env: Environment variables pour le main
  *
  * Return: Toujours 0.
  */
-int main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **env)
 {
 	char *command = NULL;
 	size_t input_length = 0;
@@ -81,7 +81,7 @@ int main(int argc, char **argv, char **envp)
 			continue;
 		}
 
-		execute_command(command, argv, envp); /*Appele fork pour exéc commande*/
+		execute_command(command, argv, env); /*Appele fork pour exéc commande*/
 	}
 	free(command);
 	return (0);
