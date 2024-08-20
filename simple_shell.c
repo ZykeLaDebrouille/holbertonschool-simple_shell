@@ -22,7 +22,7 @@ void remove_newline(char *str)
  * execute_command - Crée un processus enfant pour exécuter une commande
  * @command: Commande à exécuter
  * @argv: Nom du programme pour les messages d'erreur
- * @env: Variables d'environnement
+ * @envp: Variables d'environnement
  */
 void execute_command(char *command, char **argv, char **envp)
 {
@@ -84,7 +84,7 @@ int main(int argc, char **argv, char **envp)
 			continue;
 		}
 
-		execute_command(command, argv, envp); /*Appele fonction pour exéc commande*/
+		execute_command(command, argv, envp); /*Appele fork pour exéc commande*/
 	}
 	free(command);
 	return (0);
