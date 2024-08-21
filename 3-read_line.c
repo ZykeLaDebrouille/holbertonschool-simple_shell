@@ -16,9 +16,9 @@ char *read_line(void)
 
 	if (read == -1)
 	{
-		perror("Error reading line");
-		return (NULL);
+		free(line);
+		exit(EXIT_SUCCESS);
 	}
-
+	remove_newline(line);
 	return (line);
 }

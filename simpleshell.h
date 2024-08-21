@@ -6,6 +6,10 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/types.h>
+#include <errno.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
 
 /* past functions created before */
 
@@ -32,11 +36,17 @@ int print_all_argv(int argc, char *argv[]);
 char *read_line(void);
 /** Reads the input and print it */
 
-int split_string_in_token(char *line);
+char **split_string_in_token(char *str);
 /** Splits a string into tokens with a delimiter */
 
 char *remove_newline(char *line);
 /** Remove the new_line of a given input */
+
+void print_env(char **env);
+/** Print environment */
+
+void execute_command(char *command, char **argv, char **env);
+/** fork*/
 
 
 #endif
