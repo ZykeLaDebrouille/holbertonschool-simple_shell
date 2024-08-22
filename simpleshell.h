@@ -45,8 +45,11 @@ char *remove_newline(char *line);
 void print_env(char **env);
 /** Print environment */
 
-void execute_command(char *command, char **argv, char **env);
-/** fork*/
+void execute_command(char **command, char **argv, char **env);
+/** Fork to creat a child process to execute a command*/
+
+int built_in(char *command, char **env);
+/** exit if "exit" typed, print environement if "env" typed */
 
 
 #endif
