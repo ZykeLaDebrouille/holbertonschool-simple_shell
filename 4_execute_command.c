@@ -3,41 +3,41 @@
 /**
  * execute_command - Create a child process to execute a command
  * @command: command to execute
- * @argv: Name of the program for the error message
- * @env: environnement variable
+ * @env: environment variables
+ * @shell_name: name of the shell (argv[0])
  */
-void execute_command(char **command, char **argv, char **env)
+void execute_command(char **command, char **env, char *shell_name)
 {
 	pid_t child_pid;
 	int child_status;
-	char *args[20];
 
-	child_pid = fork(); /** Create a child process */
-	if (child_pid == -1)
+	if (command == NULL || command[0] == NULL || command[0][0] == '\0')
+		return;								/** Return if command is empty or NULL */
+
+
+	child_pid = fork();						/** Create a child process */
+	if (child_pid == -1)					/** Check if child process failed */
 	{
-		perror("Erreur de fork");
+		perror("Fork error");
 		return;
 	}
 
-	if (child_pid == 0)
+	if (child_pid == 0)						/** Child process */
 	{
-		args[0] = command[0]; /** Command to execute*/
-		args[1] = NULL;	   /** End of the argument array */
-
-		if (access(args[0], X_OK) == -1) /** Check if the command can be executed */
+		if (access(command[0], X_OK) == -1)	/** Check if executable */
 		{
-			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command[0]);
+			fprintf(stderr, "%s: 1: %s: not found\n", shell_name, command[0]);
 			exit(EXIT_FAILURE);
 		}
 
-		if (execve(args[0], args, env) == -1)
+		if (execve(command[0], command, env) == -1) /** Check if execu. failed*/
 		{
-			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command[0]);
+			fprintf(stderr, "%s: 1: %s: not found\n", shell_name, command[0]);
 			exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
-		wait(&child_status); /*Attendre que l'enfant se termine*/
+		wait(&child_status);				/** Wait for the child process to finish */
 	}
 }

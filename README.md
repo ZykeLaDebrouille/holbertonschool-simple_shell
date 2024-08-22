@@ -21,6 +21,7 @@ To begin with, we decided to devide the work:
 		- [Interactive and Non-Interactive Modes](#interactive-and-non-interactive-modes)
 	- [Introduction to the project `Simple Shell`](#introduction-to-the-project-simple-shell)
 		- [Mandatory tasks](#mandatory-tasks)
+		- [Advances tasks](#advances-tasks)
 	- [Manpage `Simple Shell`](#manpage-simple-shell)
 		- [How we tested our project.](#how-we-tested-our-project)
 		- [Some tests to try:](#some-tests-to-try)
@@ -360,6 +361,13 @@ Our objectives for the mandatory taks are:
 
 4. **Built-in Commands:** Implement basic built-in commands, including `exit` to terminate the shell and `env` to display environment variables.
 
+### Advances tasks
+
+Despite not having time to do all the mandatory tasks we wanted to do (especially about the PATH), we managed to do some - easy - advanced tasks such as :
+
+**12. Simple shell 0.4.2:**
+   - Handeling `Ctrl+C` to not quit when the user inputs is `^C` 
+
 ## Manpage `Simple Shell`
 
 A "Manpage" is short for "Manual Page". This is a command scripted to display the manual page of `Simple Shell`, explaining the command and how to use it, while being in bash.
@@ -454,6 +462,11 @@ Here are some simple tests to try:
 *A test to see how tokenized works in our shell*
 ```sh
 /bin/ls -l
+```
+
+*A test to clear the terminal*
+```sh
+/bin/clear
 ```
 
 ## Flowchart

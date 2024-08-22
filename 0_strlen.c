@@ -10,17 +10,15 @@ int _strlen(char *s)
 
 	count = 0;
 
+	/** Iterate through the string */
 	while (*s != '\0')
-
-		/**
-		* Allows to traverse the array to which point s
-		* "*s" literally designates this array I do not need
-		* its memory address with p = &s or other.
-		*/
 	{
+		/** Increment count for each character */
 		count++;
+		/* Move to the next character */
 		s++;
 	}
 
+	/** Return the total count (length of the string) */
 	return (count);
 }
