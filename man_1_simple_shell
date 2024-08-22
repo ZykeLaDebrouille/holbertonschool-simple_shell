@@ -4,7 +4,7 @@
 simple_shell \- this is our shell
 
 .SH SYNOPSIS
-.B simple_shell [command] [file]
+.B simple_shell [command_path/command] [arguments]
 
 .SH DESCRIPTION
 Generally, a shell is a program that executes other programs in response to text commands
@@ -19,20 +19,21 @@ Features: All Unix shells provide filename wildcarding, piping, here documents, 
 
 .SH Key System Calls
 
-   - **`fork()`:** Creates a new process by duplicating the calling process. Used to launch commands in a shell.
+   - **`execute_command()`:** Creates a new process by duplicating the calling process. Used to launch commands in a shell.
+   - **`_calloc()`:** our calloc() function.
+   - **`_strlen()` :** our strlen() function.
+   - **`read_line()` :** Read command from user.
+   - **`split_string_in_token()` :** Split string to get argument for command.
+    - **`built_in()` :** check if command is a built_in.
    - **`execve()`:** Execve is a function that executes a program while allowing you to specify both the arguments and the environment in which the program runs.
    - **`wait()`:** Waits for child processes to terminate. Used to synchronize process execution.
-   - **`chdir()`:** Changes the current working directory of the process.
+   - **`print_env()`:** display environnement.
    - **`open()`, `read()`, `write()`, `close()`:** Basic file operations.
 
 .SH BUILTIN COMMANDS
 The following commands below are called and handled directly in the shell.
 Therefore, these commands do not need to call upon a child process to be
-executed. However, with the exit builtin it returns an exits status of 0
-on successful execution. In failure, the exit will return 126 when the
-command invoked can not execute. Also, it will return 127 when the command
-is not found. It will return a value of 2 in failure--misuse of the shell
-builtin.
+executed.
 
 The following commands are executed in the shell as builtins
 
