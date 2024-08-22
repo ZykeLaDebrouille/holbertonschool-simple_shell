@@ -11,7 +11,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
-/* past functions created before */
+/** Past functions created in previous projects */
 
 int _strlen(char *s);
 /** Function to count a string lenght */
@@ -19,12 +19,13 @@ int _strlen(char *s);
 char *_memset(char *s, char b, unsigned int n);
 /** 
  * Fonction permettant d'enregistrer un byte (ou valeur) 
- * dans la mémoire sélectionnée */
+ * dans la mémoire sélectionnée
+ */
 
 void *_calloc(unsigned int nmemb, unsigned int size);
-/* Function that allocates memory for an array, using malloc */
+/** Function that allocates memory for an array, using malloc */
 
-/* past functions created before */
+/** Past functions created in previous projects */
 
 char *read_line(void);
 /** Reads the input and print it */
@@ -35,14 +36,17 @@ char **split_string_in_token(char *str);
 char *remove_newline(char *line);
 /** Remove the new_line of a given input */
 
-void execute_command(char **command, char **argv, char **env);
+void execute_command(char **command, char **env, char *shell_name);
 /** Fork to creat a child process to execute a command*/
 
 void print_env(char **env);
 /** Print environment */
 
 int built_in(char *command, char **env);
-/** exit if "exit" typed, print environement if "env" typed */
+/** Exit if "exit" typed, print environment if "env" typed */
+
+void free_tokenised_command(char **tokenised_command);
+/** Function to free an array of strings */
 
 
 #endif
