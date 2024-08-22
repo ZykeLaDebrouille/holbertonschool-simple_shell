@@ -47,6 +47,12 @@ The following commands are executed in the shell as builtins
 
 .SH EXAMPLES
 
+root@1109c36033ba:~/holbertonschool-simple_shell# ./hsh
+$ /bin/ls
+0_calloc.c  1_read_line.c              3_remove_newline.c   5_print_env.c  7_free_tokenised_command.c  README.md  hsh     man_1_simple_shell
+0_strlen.c  2_split_string_in_token.c  4_execute_command.c  6_built_in.c   AUTHORS                     _test      main.c  simpleshell.h
+$ 
+
 .SH BUGS
 *Example of  how we will handle error with `sh`:*
 
