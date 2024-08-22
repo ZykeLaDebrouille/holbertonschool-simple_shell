@@ -13,14 +13,14 @@ char **split_string_in_token(char *str)
 	char *token = NULL; /** Pointer to store each token */
 	char string_to_tokenised[1024]; /** Array to hold the copy of the string to be tokenized */
 	char **array_of_token; /** Array of strings to store each token */
-	int index = 0, temporary_index = 0; /** Indices for loops */
+	int index = 0; /** Indice for loops */
 	int size_array_of_token = 100; /** Maximum number of tokens expected */
 
 	/** Check if the input string is NULL */
 	if (str == NULL)
 	{
 		perror("Failed : string NULL"); /** Print an error message if str is NULL */
-		return;  /** Return an error code to indicate failure */
+		exit (EXIT_FAILURE);  /** Return an error code to indicate failure */
 	}
 
 	remove_newline(str); /** Function to remove the newline character from the input string */
@@ -30,7 +30,7 @@ char **split_string_in_token(char *str)
 	if (array_of_token == NULL)
 	{
 		perror("Failed to allocate memory"); /** Print an error message if memory allocation fails */
-		return; /** Return an error code to indicate failure */
+		exit (EXIT_FAILURE); /** Return an error code to indicate failure */
 	}
 
 	/** Copy the content of line into string_to_tokenised */
