@@ -1,13 +1,13 @@
-#include "shell.h"
+#include "simpleshell.h"
 /**
- * print_env - Imprime toutes les variables d'environnement
- * @env: Tableau de chaînes de caractères des variables d'environnement
+ * print_env - Print all variables of the environnement
+ * @env: Array of strings of environnement variables
  */
 void print_env(char **env)
 {
 	int i = 0;
 
-	while (env[i]) /*parcours env*/
+	while (env[i]) /*go through environnement*/
 	{
 		printf("%s\n", env[i]);
 		i++;
@@ -15,11 +15,11 @@ void print_env(char **env)
 }
 
 /**
- * _getenv - Récupère la valeur d'une variable d'environnement
- * @name: Nom de la variable d'environnement à rechercher
- * @env: Tableau de chaînes de caractères des variables d'environnement
+ * _getenv - Get the value of the environnement variable
+ * @name: Name of the environnement car to look for
+ * @env: Array of strings of environnement variables
  *
- * Return: Valeur de la variable d'environnement ou NULL si non trouvé
+ * Return: Value of the environnement var or NULL if not found.
  */
 char *_getenv(const char *name, char **env)
 {
@@ -30,7 +30,7 @@ char *_getenv(const char *name, char **env)
 	{
 		if (strncmp(env[i], name, len) == 0 && env[i][len] == '=')
 		{
-			return (env[i] + len + 1); /*Retourne la valeur après le '='*/
+			return (env[i] + len + 1); /*return the value after '='*/
 		}
 		i++;
 	}
