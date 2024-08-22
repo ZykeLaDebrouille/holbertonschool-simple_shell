@@ -26,13 +26,13 @@ void execute_command(char **command, char **argv, char **env)
 
 		if (access(args[0], X_OK) == -1) /** Check if the command can be executed */
 		{
-			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
+			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command[0]);
 			exit(EXIT_FAILURE);
 		}
 
 		if (execve(args[0], args, env) == -1)
 		{
-			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
+			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command[0]);
 			exit(EXIT_FAILURE);
 		}
 	}
