@@ -49,7 +49,7 @@ int help_builtin(char **command);
 void help_builtin_cmd(char **command);
 /** help with "command" */
 
-int built_in(char *command, char **env);
+int built_in(char **command, char **env);
 /** Exit if "exit" typed, print environment if "env" typed */
 
 void free_tokenised_command(char **tokenised_command);

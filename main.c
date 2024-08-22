@@ -41,13 +41,13 @@ int main(int argc, char **argv, char **env)
 			continue;
 		}
 
-		if (built_in(tokenised_command[0], env) == 2)
+		if (built_in(tokenised_command, env) == 2)
 		{
 			free(command);
 			free_tokenised_command(tokenised_command);
 			exit(EXIT_SUCCESS);
 		}
-		else if (built_in(tokenised_command[0], env) == 0)
+		else if (built_in(tokenised_command, env) == 0)
 		{
 			free(command);
 			free_tokenised_command(tokenised_command);
