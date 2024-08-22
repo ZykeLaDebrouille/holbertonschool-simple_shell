@@ -5,34 +5,36 @@
  */
 void print_env(char **env)
 {
-	int i = 0;
+	int index = 0;
 
-	while (env[i]) /*go through environnement*/
+	while (env[index]) /*go through environnement*/
 	{
-		printf("%s\n", env[i]);
-		i++;
+		printf("%s\n", env[index]);
+		index++;
 	}
 }
 
 /**
  * _getenv - Get the value of the environnement variable
- * @name: Name of the environnement car to look for
+ * @name: Name of the environnement var to look for
  * @env: Array of strings of environnement variables
  *
  * Return: Value of the environnement var or NULL if not found.
  */
+
 char *_getenv(const char *name, char **env)
 {
-	int i = 0;
+	int index = 0;
 	size_t len = strlen(name);
 
-	while (env[i] != NULL)
+	while (env[index] != NULL)
 	{
-		if (strncmp(env[i], name, len) == 0 && env[i][len] == '=')
+		/** Check if current env var matches the name */
+		if (strncmp(env[index], name, len) == 0 && env[index][len] == '=')
 		{
-			return (env[i] + len + 1); /*return the value after '='*/
+			return (env[index] + len + 1); /** Return value after '=' */
 		}
-		i++;
+		index++;
 	}
-	return (NULL);
+	return (NULL);							/** Return NULL if not found */
 }
