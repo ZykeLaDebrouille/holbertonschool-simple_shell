@@ -4,17 +4,6 @@ This `README.md` will contain the necessary files for the `Simple Shell` project
 
 To begin with, we decided to devide the work:
 
-- Arc will: 
-  - write the documentation (`REAMDE.md`)
-
-- Enes will:
-  - write do the Flowchart.
-  - the MANPAGE redaction and implement
-
- - Teamwork:
-
-Note : This `README.md` will be updated several times as the project progresses.
-
 ## Summary
 
 - [Project `Simple Shell`](#project-simple-shell)
@@ -23,7 +12,7 @@ Note : This `README.md` will be updated several times as the project progresses.
 		- [Operating System:](#operating-system)
 		- [Compilation flags](#compilation-flags)
 		- [General requirements and restrictions for the projects](#general-requirements-and-restrictions-for-the-projects)
-		- [Allowed Functions and system calls+](#allowed-functions-and-system-calls)
+		- [Allowed Functions and system calls](#allowed-functions-and-system-calls)
 	- [Glossary (in alphabetical order)](#glossary-in-alphabetical-order)
 	- [Foreword: What is a Unix Shell?](#foreword-what-is-a-unix-shell)
 		- [Types of Shells](#types-of-shells)
@@ -32,9 +21,6 @@ Note : This `README.md` will be updated several times as the project progresses.
 		- [Interactive and Non-Interactive Modes](#interactive-and-non-interactive-modes)
 	- [Introduction to the project `Simple Shell`](#introduction-to-the-project-simple-shell)
 		- [Mandatory tasks](#mandatory-tasks)
-	- [Building the `Simple Shell`](#building-the-simple-shell)
-		- [Important notions encountered](#important-notions-encountered)
-			- [Understanding Process IDs (`PIDs`) and a Parent Process IDs (`PPIDs`)](#understanding-process-ids-pids-and-a-parent-process-ids-ppids)
 	- [Manpage `Simple Shell`](#manpage-simple-shell)
 		- [How we tested our project.](#how-we-tested-our-project)
 		- [Some tests to try:](#some-tests-to-try)
@@ -135,7 +121,7 @@ $ echo "qwerty" | ./././hsh
 $
 ```
 
-### Allowed Functions and system calls+
+### Allowed Functions and system calls
 
 all functions from `string.h` and the functions and system calls below:
 
@@ -370,68 +356,35 @@ Our objectives for the mandatory taks are:
 	- Handles errors, including unrecognized commands and **end-of-file** confitions (Ctrl+D).
 	- Repeats the prompt after each command execution (going back to the line to allow the user to type again.)
 
-3. **More Functionalities:** Extene the shell to handle commands with arguments and manage executable paths correctly 
+3. **More Functionalities:** Extense the shell to handle commands with arguments and manage executable paths correctly 
 
 4. **Built-in Commands:** Implement basic built-in commands, including `exit` to terminate the shell and `env` to display environment variables.
-
-## Building the `Simple Shell`
-
-### Important notions encountered
-
-#### Understanding Process IDs (`PIDs`) and a Parent Process IDs (`PPIDs`)
-
-**Key Concepts:**
-
-   1. **Process ID (`PID`):**
-       
-	   A **`PID`** i a **unique** identifier assigned to each process running on a Unix-like operating system. It helps the operating system manage and track processes.
-   
-   2. **Parent Process ID (`PPID`):** 	
-   
-   		A **`PPID`** is the **`PID`** of the parent process that created (or spawned) the currnt process. Every process, except the initial system process, has a parent process.
-
-**System Calls**
-
-   - **`getppid`:**
-   
-   This system call returns the **`PID`** of the parent process of the currently running process. It is useful for a process to know who its parents is, which can be important for process management end communication.
-   
-   - **`PPID` and `echo $$`:**
-    
-	When you write a program that uses **`getppid`**, it will print the `PID` of the parents process. So even when running multiple of times in the same shell, it will consistently get the same `PPID` because the shell remains the parent process.
-
-	The command **`echo $$`** prints the PID of the current shell process. Same with the previous point, since the shell process doesn't change during the session, this value remains constant.
-
-   - **Why are they the same?** 
-
-   When you execute your program from the sam shell session, the shell is the parent process. So, the `PPID` reported by **`getppid`** in your program and the `PID` of the shell printed by **`echo $$`** will be the same. 
-
 
 ## Manpage `Simple Shell`
 
 A "Manpage" is short for "Manual Page". This is a command scripted to display the manual page of `Simple Shell`, explaining the command and how to use it, while being in bash.
 
-**Step 1: Creating the Directory Structure**
+**Step 1: Move the Man page to system directory**
 
-First, it's requiered to create the necessary directories if they don't already exist.
+First, it's requiered to move the necessary man page to the required directory.
 
 ```sh
-sudo mkdir -p /usr/local/man/man3
+sudo mv man_1_simple_shell /usr/local/man1/man_1_simple_shell.1
 ```
 
-**Step 2: Install the manpage**
+**Step 2: Restore man page from git repository (is necessary)**
 
 After creating the directory structure, installing the manpage with `sudo`to ensure to have the necessary permissions:
 
 ```sh
-sudo install -o root -m 0644 
+git restore man_1_simple_shell 
 ```
 
 Little breakdown about what this all about:
 
-  - **`-o root`:** Specifies the owner of the file (root in this case).
+  - **`mv man_1_simple_shell`:** move the man page
 
-  - **`-m 0644`:** Sets the permissions of the file (readable and writable by the owner, readable by others).
+  - **`git restore`:** restore a file
 
   - **`man_1_simple_shell`:** The source file for the manpage.
 
@@ -491,7 +444,17 @@ This allowed us to verify if our function operated correctly and efficiently, en
 
 ### Some tests to try:
 
-Here are some simple test to try: **placeholder**
+Here are some simple tests to try: 
+
+*Displaying path to the working directory*
+```sh
+/bin/pwd
+```
+
+*A test to see how tokenized works in our shell*
+```sh
+/bin/ls -l
+```
 
 ## Flowchart
 
@@ -499,7 +462,7 @@ Here are some simple test to try: **placeholder**
 
 ## Conclusion
 
-
+To conclude, this project has been a challenge in overall. Asking for us to use a lot of things we learned throught this trimester. It has been difficult and challenging especially to work on a such a big project in group. But in the end, even if we may have not finished entierly, it mostly works and above all, we understand everything we've done.
 
 ## Author
 

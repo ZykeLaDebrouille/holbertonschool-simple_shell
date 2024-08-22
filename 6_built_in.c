@@ -2,11 +2,11 @@
 /**
  * built_in - command built_in
  * @command: command
- * @environ: variable environnement
+ * @env: variable environnement
  *
  * Return: int
 */
-int built_in(char *command, char **environ)
+int built_in(char *command, char **env)
 {
 	if (command == NULL) /*si pas de commande*/
 	{
@@ -22,7 +22,8 @@ int built_in(char *command, char **environ)
 
 	if (strcmp(command, "env") == 0) /* si commande = "env "*/
 	{
-		print_env(environ);
+		print_env(env);
 		return (0);
 	}
+	return (1);
 }

@@ -26,13 +26,6 @@ void *_calloc(unsigned int nmemb, unsigned int size);
 
 /* past functions created before */
 
-
-int getppid(void);
-/** Print the PPID */
-
-int print_all_argv(int argc, char *argv[]);
-/** Prints all argv without using ac */
-
 char *read_line(void);
 /** Reads the input and print it */
 
@@ -42,11 +35,14 @@ char **split_string_in_token(char *str);
 char *remove_newline(char *line);
 /** Remove the new_line of a given input */
 
+void execute_command(char **command, char **argv, char **env);
+/** Fork to creat a child process to execute a command*/
+
 void print_env(char **env);
 /** Print environment */
 
-void execute_command(char *command, char **argv, char **env);
-/** fork*/
+int built_in(char *command, char **env);
+/** exit if "exit" typed, print environement if "env" typed */
 
 
 #endif
