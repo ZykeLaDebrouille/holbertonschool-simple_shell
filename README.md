@@ -473,6 +473,8 @@ This allowed us to verify if our function operated correctly and efficiently, en
 
 Here are some simple tests to try: 
 
+**Interactive tests:**
+
 *Displaying path to the working directory*
 ```sh
 /bin/pwd
@@ -487,6 +489,12 @@ Here are some simple tests to try:
 ```sh
 /bin/clear
 ```
+
+**Non-interactive tests:**
+
+```sh
+echo "/bin/ls" | ./hsh
+```` 
 
 ### Bugs
 
