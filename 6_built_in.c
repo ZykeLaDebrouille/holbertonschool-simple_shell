@@ -10,7 +10,7 @@
 
 int built_in(char **command, char **env)
 {
-	if (command == NULL)
+	if (command[0] == NULL)
 		return (1);		/** Treat NULL command as non-built-in */
 
 	if (strcmp(command[0], "exit") == 0)
@@ -37,9 +37,9 @@ int help_builtin(char **command)
 {
 	if (command[1] == NULL)
 	{
-		printf("here are the builtins commands we've implemented so far\n\n");
-		printf("use this command to get more help about exit:  help exit\n");
-		printf("use this command to get more help about env:  help env\n");
+		printf("Here are the builtins commands we've implemented so far:\n\n");
+		printf("Use this command to get more help about 'exit':  help exit\n");
+		printf("Use this command to get more help about 'env':  help env\n");
 	}
 	else
 	{
@@ -58,13 +58,13 @@ void help_builtin_cmd(char **command)
 	/* Display help for 'exit' command */
 	if (strcmp(command[1], "exit") == 0)
 	{
-		printf("exit: quits the shell programm.\n");
+		printf("'exit': quits the shell programm.\n");
 		printf("Usage: $exit\n");
 	}
 	/* Display help for 'env' command */
 	if (strcmp(command[1], "env") == 0)
 	{
-		printf("env: display environnement.\n");
+		printf("'env': display environnement.\n");
 		printf("Usage: $env\n");
 	}
 	/* Display help for 'help' command */
