@@ -13,7 +13,7 @@ int main(int argc, char **argv, char **env)
 {
 	char *command = NULL;											/** Store user input command */
 	char **tokenised_command = NULL;								/** Store tokenized command */
-	int value_returned_built_in;
+	int value_returned_built_in, status = 0, exitstatus = 0;
 
 	(void)argc;														/** Suppress unused variable warning */
 	while (1)														/** Infinite loop for shell prompt */
@@ -48,5 +48,6 @@ int main(int argc, char **argv, char **env)
 		free(command);												/** Free memory allocated for command */
 		free_tokenised_command(tokenised_command);					/** Free tokenized command */
 	}
-	return (0);
+		exitstatus = WEXITSTATUS(status);
+		return (exitstatus);
 }
