@@ -47,5 +47,5 @@ int execute_command(char **command, char **env, char *shell_name)
 				return (WEXITSTATUS(child_status)); /** Return child's exit status */
 			}
 		}
-		return (1);									/** If wait fails, return error */
+		return (0);									/** If wait fails, return error */
 	}
