@@ -37,7 +37,7 @@ char **split_string_in_token(char *str);
 char *remove_newline(char *line);
 /** Remove the new_line of a given input */
 
-void execute_command(char **command, char **env, char *shell_name);
+int execute_command(char **command, char **env, char *shell_name);
 /** Fork to creat a child process to execute a command*/
 
 void print_env(char **env);
