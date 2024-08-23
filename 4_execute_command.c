@@ -29,13 +29,13 @@ int execute_command(char **command, char **env, char *shell_name)
 		if (access(command[0], X_OK) == -1)
 		{
 			fprintf(stderr, "%s: 1: %s: not found\n", shell_name, command[0]);
-			exit(127);  /** 127 is the standard exit code for "command not found" */
+			exit(EXIT_FAILURE);
 		}
 
 		if (execve(command[0], command, env) == -1)
 		{
 			fprintf(stderr, "%s: 1: %s: not found\n", shell_name, command[0]);
-			exit(127);
+			exit(EXIT_FAILURE);
 		}
 	}
 	else
