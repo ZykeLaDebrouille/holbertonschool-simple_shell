@@ -22,9 +22,13 @@ To begin with, we decided to devide the work:
 	- [Introduction to the project `Simple Shell`](#introduction-to-the-project-simple-shell)
 		- [Mandatory tasks](#mandatory-tasks)
 		- [Advances tasks](#advances-tasks)
-	- [Manpage `Simple Shell`](#manpage-simple-shell)
+	- [Usage](#usage)
+		- [Interactive Mode](#interactive-mode)
+		- [Non-Interactive Mode](#non-interactive-mode)
 		- [How we tested our project.](#how-we-tested-our-project)
 		- [Some tests to try:](#some-tests-to-try)
+		- [Bugs](#bugs)
+	- [Manpage `Simple Shell`](#manpage-simple-shell)
 	- [Flowchart](#flowchart)
 	- [Conclusion](#conclusion)
 	- [Author](#author)
@@ -368,6 +372,175 @@ Despite not having time to do all the mandatory tasks we wanted to do (especiall
 **12. Simple shell 0.4.2:**
    - Handeling `Ctrl+C` to not quit when the user inputs is `^C` 
 
+## Usage
+
+The Simple Shell can be used in both interactive and non-interactive modes.
+
+### Interactive Mode
+
+In interactive mode, the shell displays a prompt and waits for user input.
+
+To start the shell in interactive mode:
+
+```bash
+$ ./hsh
+($) /bin/ls -l
+total 128
+-rw-r--r-- 1 arc arc  1184 Aug 22 18:47 0_calloc.c
+-rw-r--r-- 1 arc arc   377 Aug 22 18:50 0_strlen.c
+-rw-r--r-- 1 arc arc   687 Aug 22 18:51 1_read_line.c
+-rw-r--r-- 1 arc arc  1391 Aug 22 18:59 2_split_string_in_token.c
+-rw-r--r-- 1 arc arc   436 Aug 22 18:52 3_remove_newline.c
+-rw-r--r-- 1 arc arc  1083 Aug 22 18:53 4_execute_command.c
+-rw-r--r-- 1 arc arc   909 Aug 22 19:02 5_print_env.c
+-rw-r--r-- 1 arc arc   628 Aug 22 18:54 6_built_in.c
+-rw-r--r-- 1 arc arc   510 Aug 22 19:03 7_free_tokenised_command.c
+-rw-r--r-- 1 arc arc   153 Aug 22 09:19 AUTHORS
+-rw-r--r-- 1 arc arc 22330 Aug 22 20:48 README.md
+-rwxr-xr-x 1 arc arc 17664 Aug 22 20:05 a.out
+-rwxr-xr-x 1 arc arc 28216 Aug 22 20:47 hsh
+-rw-r--r-- 1 arc arc  1200 Aug 22 20:32 main.c
+-rw-r--r-- 1 arc arc  2694 Aug 22 10:10 man_1_simple_shell
+-rw-r--r-- 1 arc arc  1276 Aug 22 19:31 simpleshell.h
+drwxr-xr-x 2 arc arc  4096 Aug 22 19:00 test_pour_moi
+($) exit
+```
+### Non-Interactive Mode
+
+In non-interactive mode, the shell reads commands from a pipe of a file (if implemented)
+
+```bash
+$ echo "/bin/ls" | ./hsh
+0_calloc.c                 4_execute_command.c         README.md           simpleshell.h
+0_strlen.c                 5_print_env.c               a.out               test_pour_moi
+1_read_line.c              6_built_in.c                hsh
+2_split_string_in_token.c  7_free_tokenised_command.c  main.c
+3_remove_newline.c         AUTHORS                     man_1_simple_shell
+$
+```
+
+Example now using a file (assuming you have a file name `commands.txt` with shell commands). Here we created especially a `commands.txt` with just the following command inside : `ls -l` 
+
+```bash
+$ ./hsh < commands.txt
+total 112
+-rw-r--r-- 1 arc arc  1184 Aug 22 18:47 0_calloc.c
+-rw-r--r-- 1 arc arc   377 Aug 22 18:50 0_strlen.c
+-rw-r--r-- 1 arc arc   687 Aug 22 18:51 1_read_line.c
+-rw-r--r-- 1 arc arc  1391 Aug 22 18:59 2_split_string_in_token.c
+-rw-r--r-- 1 arc arc   436 Aug 22 18:52 3_remove_newline.c
+-rw-r--r-- 1 arc arc  1083 Aug 22 18:53 4_execute_command.c
+-rw-r--r-- 1 arc arc   909 Aug 22 19:02 5_print_env.c
+-rw-r--r-- 1 arc arc   628 Aug 22 18:54 6_built_in.c
+-rw-r--r-- 1 arc arc   510 Aug 22 19:03 7_free_tokenised_command.c
+-rw-r--r-- 1 arc arc   153 Aug 22 09:19 AUTHORS
+-rw-r--r-- 1 arc arc 23455 Aug 22 20:51 README.md
+-rw-r--r-- 1 arc arc    10 Aug 22 20:52 commands.txt
+-rwxr-xr-x 1 arc arc 28216 Aug 22 20:47 hsh
+-rw-r--r-- 1 arc arc  1200 Aug 22 20:32 main.c
+-rw-r--r-- 1 arc arc  2694 Aug 22 10:10 man_1_simple_shell
+-rw-r--r-- 1 arc arc  1276 Aug 22 19:31 simpleshell.h
+drwxr-xr-x 2 arc arc  4096 Aug 22 19:00 test_pour_moi
+```
+
+In both modes, the Simple Shell supports basic command execution, including commands with arguments and those found in the PATH.
+
+### How we tested our project.
+
+In this section, we are going to focus on the construction of the script itself and especially how we tested it..
+
+So, to provide a safe environnement to test our functions without messing everything up, we created both of us a separate branch.
+
+We adjusted or implemented the changes what we wanted to try, then compiled everything together like this:
+
+```sh
+gcc -g -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+```
+
+to test if it works.
+
+**Testing with Valgrind:**
+
+To ensure there are no memory leaks or other issues, we used Valgrind for testing at each step. Here’s a brief example command to check for memory-related problems:
+
+```sh
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./hsh
+```
+
+This allowed us to verify if our function operated correctly and efficiently, ensuring reliable performance in various scenarios.
+
+### Some tests to try:
+
+Here are some simple tests to try: 
+
+*Displaying path to the working directory*
+```sh
+/bin/pwd
+```
+
+*A test to see how tokenized works in our shell*
+```sh
+/bin/ls -l
+```
+
+*A test to clear the terminal*
+```sh
+/bin/clear
+```
+
+### Bugs
+
+**Mandatory features not-implemented:**
+
+As you may have seen, everything isn't running smoothly. There are some bugs. The biggest one, isn't a "bug" in itself but more that we didn't had time to finish. we couldn't code the all the "PATH" related tasks. So, as you could see in the previous tests, we are obliged to use `/bin/` before calling a function.
+
+**Valgrind:**
+
+*Valgrind Output tested with "ls"*
+```
+==16768== Memcheck, a memory error detector
+==16768== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==16768== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==16768== Command: ./hsh
+==16768== 
+$ ls
+./hsh: 1: ls: not found
+==16772== 
+==16772== HEAP SUMMARY:
+==16772==     in use at exit: 923 bytes in 3 blocks
+==16772==   total heap usage: 6 allocs, 3 frees, 2,974 bytes allocated
+==16772== 
+==16772== 3 bytes in 1 blocks are still reachable in loss record 1 of 3
+==16772==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==16772==    by 0x490858E: strdup (strdup.c:42)
+==16772==    by 0x109606: split_string_in_token (2_split_string_in_token.c:37)
+==16772==    by 0x109AFF: main (main.c:37)
+==16772== 
+==16772== 120 bytes in 1 blocks are still reachable in loss record 2 of 3
+==16772==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==16772==    by 0x48E0122: getdelim (iogetdelim.c:62)
+==16772==    by 0x1094E2: read_line (1_read_line.c:15)
+==16772==    by 0x109AA0: main (main.c:23)
+==16772== 
+==16772== 800 bytes in 1 blocks are still reachable in loss record 3 of 3
+==16772==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==16772==    by 0x10943D: _calloc (0_calloc.c:46)
+==16772==    by 0x1095A8: split_string_in_token (2_split_string_in_token.c:26)
+==16772==    by 0x109AFF: main (main.c:37)
+==16772== 
+==16772== LEAK SUMMARY:
+==16772==    definitely lost: 0 bytes in 0 blocks
+==16772==    indirectly lost: 0 bytes in 0 blocks
+==16772==      possibly lost: 0 bytes in 0 blocks
+==16772==    still reachable: 923 bytes in 3 blocks
+==16772==         suppressed: 0 bytes in 0 blocks
+==16772== 
+==16772== For lists of detected and suppressed errors, rerun with: -s
+==16772== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+```
+
+Here we can see there is no **leaks** in itself but yet, it's not clear. There is still reachable memory.
+
 ## Manpage `Simple Shell`
 
 A "Manpage" is short for "Manual Page". This is a command scripted to display the manual page of `Simple Shell`, explaining the command and how to use it, while being in bash.
@@ -413,61 +586,7 @@ sudo mandb
 man simple_shell
 ```
 
-### How we tested our project.
 
-In this section, we are going to focus on the construction of the script itself and especially how we tested it, more than explaining how it works (it has already been explained in previous section).
-
-So, to provide a safe environnement to test our functions without messing everything up, we created both of us a separate branch.
-
-We adjusted or implemented the changes what we wanted to try, then compiled everything together like this:
-
-```sh
-gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format *.c
-```
-
-to test if it works.
-
-**Testing with Valgrind:**
-
-To ensure there are no memory leaks or other issues, we used Valgrind for testing at each step. Here’s a brief example command to check for memory-related problems:
-
-```sh
-valgrind --leak-check=full ./programname
-```
-
-*Valgrind Output*
-```
-==11799== 
-==11799== HEAP SUMMARY:
-==11799==     in use at exit: 0 bytes in 0 blocks
-==11799==   total heap usage: 1 allocs, 1 frees, 1,024 bytes allocated
-==11799== 
-==11799== All heap blocks were freed -- no leaks are possible
-==11799== 
-==11799== For lists of detected and suppressed errors, rerun with: -s
-==11799== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-```
-
-This allowed us to verify if our function operated correctly and efficiently, ensuring reliable performance in various scenarios.
-
-### Some tests to try:
-
-Here are some simple tests to try: 
-
-*Displaying path to the working directory*
-```sh
-/bin/pwd
-```
-
-*A test to see how tokenized works in our shell*
-```sh
-/bin/ls -l
-```
-
-*A test to clear the terminal*
-```sh
-/bin/clear
-```
 
 ## Flowchart
 
