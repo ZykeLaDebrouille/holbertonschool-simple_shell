@@ -15,32 +15,40 @@ int execute_command(char **command, char **env, char *shell_name)
 	int child_status;
 
 	if (command == NULL || command[0] == NULL || command[0][0] == '\0')
-		return (0);									/** Return if command is empty or NULL */
+		return (0);
 
-
-	child_pid = fork();								/** Create a child process */
-	if (child_pid == -1)							/** Check if child process failed */
+	child_pid = fork();
+	if (child_pid == -1)
 	{
 		perror("Fork error");
 		return (1);
 	}
 
-	if (child_pid == 0)								/** Child process */
+	if (child_pid == 0)
 	{
-		if (access(command[0], X_OK) == -1)			/** Check if executable */
+		if (access(command[0], X_OK) == -1)
 		{
 			fprintf(stderr, "%s: 1: %s: not found\n", shell_name, command[0]);
-			exit(EXIT_FAILURE);
+			exit(127);  /** 127 is the standard exit code for "command not found" */
 		}
 
-		if (execve(command[0], command, env) == -1) /** Check if execu. failed*/
+		if (execve(command[0], command, env) == -1)
 		{
 			fprintf(stderr, "%s: 1: %s: not found\n", shell_name, command[0]);
-			exit(EXIT_FAILURE);
+			exit(127);
 		}
 	}
 	else
+	{
+		waitpid(child_pid, &child_status, 0);
+		if (WIFEXITED(child_status))
+		{
+			return (WEXITSTATUS(child_status));
+		}
+		else if (WIFSIGNALED(child_status))
 		{
 			wait(&child_status); /** Wait for child status */
 		}
 	}
+	return (1);  /** This should never be reached */
+}
