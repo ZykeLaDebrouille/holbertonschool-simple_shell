@@ -18,10 +18,7 @@ int _strlen(char *s);
 /** Function to count a string lenght */
 
 char *_memset(char *s, char b, unsigned int n);
-/** 
- * Fonction permettant d'enregistrer un byte (ou valeur) 
- * dans la mémoire sélectionnée
- */
+/** Function that allocate specific byte in mem */
 
 void *_calloc(unsigned int nmemb, unsigned int size);
 /** Function that allocates memory for an array, using malloc */
