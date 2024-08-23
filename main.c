@@ -13,26 +13,15 @@ int main(int argc, char **argv, char **env)
 {
 	char *command = NULL;
 	char **tokenised_command = NULL;
+	int value_returned_built_in;
 
-	(void)argc; /*Unused var*/
+	(void)argc;						/*Unused var*/
 	while (1)
 	{
-		if (isatty(STDIN_FILENO)) /* Display prompt */
+		if (isatty(STDIN_FILENO))	/* Display prompt */
 			printf("$ ");
 
 		command = read_line();
-		if (command == NULL)
-		{
-			if (isatty(STDIN_FILENO))
-				printf("\n");
-			break;
-		}
-
-		if (command[0] == '\0' || command[0] == '\n')
-		{
-			free(command);
-			continue; /* Skip empty commands */
-		}
 
 		tokenised_command = split_string_in_token(command);
 		if (tokenised_command == NULL)
@@ -40,14 +29,14 @@ int main(int argc, char **argv, char **env)
 			free(command);
 			continue;
 		}
-
-		if (built_in(tokenised_command, env) == 2)
+		value_returned_built_in = built_in(tokenised_command, env);
+		if (value_returned_built_in == 2)
 		{
 			free(command);
 			free_tokenised_command(tokenised_command);
 			exit(EXIT_SUCCESS);
 		}
-		else if (built_in(tokenised_command, env) == 0)
+		else if (value_returned_built_in == 0)
 		{
 			free(command);
 			free_tokenised_command(tokenised_command);
