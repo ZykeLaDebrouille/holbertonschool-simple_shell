@@ -47,7 +47,7 @@ int execute_command(char **command, char **env, char *shell_name)
 		}
 		else if (WIFSIGNALED(child_status))
 		{
-			return (WTERMSIG(child_status) + 128);
+			wait(&child_status); /** Wait for child status */
 		}
 	}
 	return (1);  /** This should never be reached */
