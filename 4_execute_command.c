@@ -40,15 +40,6 @@ int execute_command(char **command, char **env, char *shell_name)
 	}
 	else
 	{
-		waitpid(child_pid, &child_status, 0);
-		if (WIFEXITED(child_status))
-		{
-			return (WEXITSTATUS(child_status));
-		}
-		else if (WIFSIGNALED(child_status))
-		{
-			wait(&child_status); /** Wait for child status */
-		}
+		wait(&child_status); /** Wait for child status */
 	}
-	return (1);  /** This should never be reached */
 }
