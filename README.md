@@ -590,7 +590,7 @@ man simple_shell
 
 ## Flowchart
 
-![Flowchart](https://cdn.discordapp.com/attachments/385020139839422464/1275399296618991626/flowchart_simp.png?ex=66c5bfa8&is=66c46e28&hm=e455fa9dae19747ee14114adecfc56c8ddf76fb49dc3c3db4c5abffc22bb7363&)
+![Flowchart](https://media.discordapp.net/attachments/385020139839422464/1276471534734802944/flowchart_simp.png?ex=66c9a641&is=66c854c1&hm=d153e5ca3d939a186e35b16b669212fa653279d9caa6b48d46298447b2d0910e&=&format=webp&quality=lossless&width=780&height=994)
 
 ## Conclusion
 
