@@ -41,7 +41,7 @@ int execute_command(char **command, char **env, char *shell_name)
 	}
 	else
 		{
-			wait(&child_status);					/** Wait for the child process to finish */
+			waitpid(child_pid, &child_status, 0);	/** Wait */
 			if (WIFEXITED(child_status))
 			{
 				return (WEXITSTATUS(child_status)); /** Return child's exit status */
