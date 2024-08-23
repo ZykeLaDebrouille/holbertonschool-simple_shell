@@ -5,21 +5,23 @@
  * @command: command to execute
  * @env: environment variables
  * @shell_name: name of the shell (argv[0])
+ *
+ * Return: 1 if error, 0 if success
  */
-void execute_command(char **command, char **env, char *shell_name)
+int execute_command(char **command, char **env, char *shell_name)
 {
 	pid_t child_pid;
 	int child_status;
 
 	if (command == NULL || command[0] == NULL || command[0][0] == '\0')
-		return;								/** Return if command is empty or NULL */
+		return (0);								/** Return if command is empty or NULL */
 
 
 	child_pid = fork();						/** Create a child process */
 	if (child_pid == -1)					/** Check if child process failed */
 	{
 		perror("Fork error");
-		return;
+		return (1);
 	}
 
 	if (child_pid == 0)						/** Child process */
@@ -40,4 +42,5 @@ void execute_command(char **command, char **env, char *shell_name)
 	{
 		wait(&child_status);				/** Wait for the child process to finish */
 	}
+	return (0)
 }
