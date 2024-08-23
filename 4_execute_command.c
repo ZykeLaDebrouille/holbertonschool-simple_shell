@@ -30,13 +30,13 @@ int execute_command(char **command, char **env, char *shell_name)
 		if (access(command[0], X_OK) == -1)			/** Check if executable */
 		{
 			fprintf(stderr, "%s: 1: %s: not found\n", shell_name, command[0]);
-			exit(EXIT_FAILURE);
+			exit(0);
 		}
 
 		if (execve(command[0], command, env) == -1) /** Check if execu. failed*/
 		{
 			fprintf(stderr, "%s: 1: %s: not found\n", shell_name, command[0]);
-			exit(EXIT_FAILURE);
+			exit(0);
 		}
 	}
 	else
