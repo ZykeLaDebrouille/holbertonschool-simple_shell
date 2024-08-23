@@ -13,7 +13,7 @@ int main(int argc, char **argv, char **env)
 {
 	char *command = NULL;
 	char **tokenised_command = NULL;
-	int value_returned_built_in, status = 0;
+	int value_returned_built_in;
 
 	(void)argc;
 	while (1)
@@ -34,7 +34,7 @@ int main(int argc, char **argv, char **env)
 		{
 			free(command);
 			free_tokenised_command(tokenised_command);
-			exit(status);  /** Exit with the last command's status */
+			exit(EXIT_SUCCESS);  /** Exit with the last command's status */
 		}
 		else if (value_returned_built_in == 0)
 		{
@@ -43,10 +43,10 @@ int main(int argc, char **argv, char **env)
 			continue;
 		}
 
-		status = execute_command(tokenised_command, env, argv[0]);
+		execute_command(tokenised_command, env, argv[0]);
 
 		free(command);
 		free_tokenised_command(tokenised_command);
 	}
-	return (status);  /** This line will never be reached in practice */
+	return (0);  /** This line will never be reached in practice */
 }
