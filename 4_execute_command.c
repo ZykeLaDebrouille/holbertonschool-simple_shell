@@ -42,5 +42,5 @@ int execute_command(char **command, char **env, char *shell_name)
 	{
 		wait(&child_status);				/** Wait for the child process to finish */
 	}
-	return (0)
+	return (0);
 }
