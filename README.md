@@ -25,6 +25,7 @@ To begin with, we decided to devide the work:
 	- [Usage](#usage)
 		- [Interactive Mode](#interactive-mode)
 		- [Non-Interactive Mode](#non-interactive-mode)
+		- [What implemented functions returns](#what-implemented-functions-returns)
 		- [How we tested our project.](#how-we-tested-our-project)
 		- [Some tests to try:](#some-tests-to-try)
 		- [Bugs](#bugs)
@@ -445,6 +446,14 @@ drwxr-xr-x 2 arc arc  4096 Aug 22 19:00 test_pour_moi
 
 In both modes, the Simple Shell supports basic command execution, including commands with arguments and those found in the PATH.
 
+### What implemented functions returns
+
+We implemented some functions:
+
+`exit`: Not a "return" in itself but stop the process et exit from the shell
+`env`: Display the environnement
+`help`: Display What and how to use the built-in command implemented
+
 ### How we tested our project.
 
 In this section, we are going to focus on the construction of the script itself and especially how we tested it..
@@ -488,6 +497,21 @@ Here are some simple tests to try:
 *A test to clear the terminal*
 ```sh
 /bin/clear
+```
+
+*Display environement*
+```sh
+env
+```
+
+*What and how to use the built-in command implemented*
+```sh
+help
+```
+
+*Exit the shell*
+```sh
+exit
 ```
 
 **Non-interactive tests:**
