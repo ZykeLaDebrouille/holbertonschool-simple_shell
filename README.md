@@ -27,7 +27,7 @@ To begin with, we decided to devide the work:
 		- [Non-Interactive Mode](#non-interactive-mode)
 		- [How we tested our project.](#how-we-tested-our-project)
 		- [Some tests to try:](#some-tests-to-try)
-			- [Bugs](#bugs)
+		- [Bugs](#bugs)
 	- [Manpage `Simple Shell`](#manpage-simple-shell)
 	- [Flowchart](#flowchart)
 	- [Conclusion](#conclusion)
@@ -488,7 +488,7 @@ Here are some simple tests to try:
 /bin/clear
 ```
 
-#### Bugs
+### Bugs
 
 **Mandatory features not-implemented:**
 
