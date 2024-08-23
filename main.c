@@ -43,11 +43,10 @@ int main(int argc, char **argv, char **env)
 			continue;												/** Skip to next iteration */
 		}
 
-		execute_command(tokenised_command, env, argv[0]);			/** Exec given comm */
-
+		status = execute_command(tokenised_command, env, argv[0]);
+		exitstatus = status;
 		free(command);												/** Free memory allocated for command */
 		free_tokenised_command(tokenised_command);					/** Free tokenized command */
 	}
-		exitstatus = WEXITSTATUS(status);
 		return (exitstatus);
 }
