@@ -15,7 +15,7 @@
 /** Past functions created in previous projects */
 
 int _strlen(char *s);
-/** Function to count a string lenght */
+/** Function to count a string length */
 
 char *_memset(char *s, char b, unsigned int n);
 /** Function that allocate specific byte in mem */
